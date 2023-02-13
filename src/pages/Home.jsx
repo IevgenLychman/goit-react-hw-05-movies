@@ -1,33 +1,33 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { fetchTrendingMovies } from 'components/Api/Api';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch(
-      'https://api.themoviedb.org/3/trending/movie/week?api_key=701545915cb61a19f4461a09eaf19948'
-    )
-      .then(res => res.json())
-      .then(data => setMovies(data));
+    async function fetchMovies() {
+      try {
+        const moviesArray = await fetchTrendingMovies();
+
+        setMovies([...moviesArray]);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchMovies();
   }, []);
 
   return (
     <div>
       <ul>
-        {movies.map(movie => (
-          <li key={movie.id}>
-            <Link
-              to={`/movies/${movie.id}`}
-              // state={{ from: location }}
-              cover={movie.poster_path}
-            >
-              {movie.title}
-            </Link>
-
-            {/* to={`/home/${movie.id}`}><li>{movie.title}</li> */}
-          </li>
-        ))}
+        {movies.map(movie => {
+          return (
+            <li key={movie.id}>
+              <NavLink to={`/movies/${movie.id}`}>{movie.title}</NavLink>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
