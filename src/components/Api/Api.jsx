@@ -34,7 +34,7 @@ export const fetchMovieByQuery = queryValue => {
 
 export const fetchMovieReviews = id => {
   return fetch(
-    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${KEY}&language=en-US`
+    `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${KEY}&language=en-US`
   )
     .then(res => res.json())
     .then(data => data.results);

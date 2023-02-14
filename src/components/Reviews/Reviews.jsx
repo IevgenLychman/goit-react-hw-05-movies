@@ -9,13 +9,14 @@ const Reviews = () => {
   useEffect(() => {
     async function fetchReviews(id) {
       try {
-        const reviews = await fetchMovieReviews(id);
+        const reviewsArr = await fetchMovieReviews(id);
 
-        setReviews([...reviews]);
+        setReviews([...reviewsArr]);
       } catch (error) {
         console.log(error);
       }
     }
+
     fetchReviews(movieId);
   }, [movieId]);
 

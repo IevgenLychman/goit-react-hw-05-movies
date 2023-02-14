@@ -1,69 +1,24 @@
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
-import propTypes from 'prop-types';
 
 export const Container = styled.div`
-  max-width: 1200px;
-  height: 100vh;
   margin: 0 auto;
-  padding: 0 16px;
-
-  &:before {
-    content: '';
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -10;
-    opacity: 0.3;
-    filter: blur(5px);
-  }
 `;
 
 export const Header = styled.header`
-  position: relative;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding: 0 16px;
-  gap: 12px;
-  height: 5rem;
-  overflow: visible;
+  height: 75px;
   background-color: transparent;
-  z-index: 1;
-
-  &:before {
-    content: '';
-    background-image: linear-gradient(
-      225deg,
-      rgba(255, 60, 172) 0%,
-      rgba(120, 75, 160) 50%,
-      rgba(43, 134, 197) 100%
-    );
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    z-index: 0;
-  }
-
-  > nav {
-    display: flex;
-  }
-`;
-
-export const Logo = styled.div`
-  width: 50px;
-  height: 50px;
-  background-size: cover;
-  z-index: 1;
+  background-image: linear-gradient(
+    360deg,
+    rgb(255 235 60) 0%,
+    rgb(75 157 160) 50%,
+    rgba(43, 134, 197) 100%
+  );
 `;
 
 export const Link = styled(NavLink)`
@@ -77,15 +32,15 @@ export const Link = styled(NavLink)`
 
   &:hover,
   &:focus {
-    color: #ff3cac;
-    text-shadow: 3px 3px 20px #ff3cac, -2px 1px 30px #ff3cac;
+    color: #332ee4;
+    text-shadow: 3px 3px 20px #332ee4, -2px 1px 30px #332ee4;
   }
 
   &.active:after {
     content: '';
     width: 100%;
     height: 3px;
-    background: #ff3cac;
+    background: #0906d870;
     display: block;
     border-radius: 2px;
     position: absolute;
@@ -97,12 +52,3 @@ export const Link = styled(NavLink)`
     font-size: 1.2rem;
   }
 `;
-
-Container.propTypes = {
-  background: propTypes.string,
-};
-
-Link.propTypes = {
-  to: propTypes.string,
-  onclick: propTypes.func,
-};

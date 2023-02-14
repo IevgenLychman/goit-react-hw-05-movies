@@ -1,6 +1,7 @@
 import { fetchMovieCast } from 'components/Api/Api';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { List, ActorDesc } from './Cast.styled';
 
 const placeHolder = `https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png`;
 const baseImgUrl = `https://image.tmdb.org/t/p/w500/`;
@@ -23,10 +24,10 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <ul>
+    <List>
       {actors.map(actor => {
         return (
-          <div key={actor.id}>
+          <ActorDesc key={actor.id}>
             <img
               src={
                 actor.profile_path
@@ -39,10 +40,10 @@ const Cast = () => {
             />
             <p>{actor.name}</p>
             <p>Character: {actor.character}</p>
-          </div>
+          </ActorDesc>
         );
       })}
-    </ul>
+    </List>
   );
 };
 export default Cast;

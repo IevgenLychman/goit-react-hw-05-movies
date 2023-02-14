@@ -3,7 +3,6 @@ export const Form = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: lightblue;
 `;
 
 export const Input = styled.input`
@@ -23,7 +22,6 @@ export const Input = styled.input`
 
 export const Btn = styled.button`
   background: none;
-  border: none;
   color: black;
   width: 30px;
   height: 30px;

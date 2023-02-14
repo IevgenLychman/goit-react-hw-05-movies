@@ -1,12 +1,14 @@
 import { fetchMovieById } from 'components/Api/Api';
 import { useEffect, Suspense, useState } from 'react';
-import { NavLink, Outlet, useParams, useLocation } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
+import { Links, FilmDesc } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
   const location = useLocation();
-  const goBackLink = location.state?.from ?? '/';
+
+  const goBackLink = location.state?.from ?? '/movie';
 
   useEffect(() => {
     async function fetchMovie(id) {
@@ -33,8 +35,8 @@ const MovieDetails = () => {
   return (
     <main>
       <div>
-        <NavLink to={goBackLink}>Go back</NavLink>
-        <div>
+        <Links to={goBackLink}>Go back</Links>
+        <FilmDesc>
           <img src={movie.imgUrl} alt="Movie poster" width="250" height="350" />
           <div>
             <h2>
@@ -46,16 +48,16 @@ const MovieDetails = () => {
             <h3>Genres</h3>
             <p>{movie.genres}</p>
           </div>
-        </div>
+        </FilmDesc>
 
         <div>
           <p>Additional information</p>
           <ul>
             <li>
-              <NavLink to="cast">Cast</NavLink>
+              <Links to="cast">Cast</Links>
             </li>
             <li>
-              <NavLink to="reviews">Reviews</NavLink>
+              <Links to="reviews">Reviews</Links>
             </li>
           </ul>
         </div>
