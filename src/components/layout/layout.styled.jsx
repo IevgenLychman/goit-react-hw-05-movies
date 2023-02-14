@@ -25,6 +25,7 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.header`
+  position: relative;
   width: 100%;
   display: flex;
   align-items: center;

@@ -1,21 +1,45 @@
+import { fetchMovieByQuery } from 'components/Api/Api';
+import MovieList from 'components/MovieList/MovieList';
+import SearchBar from 'components/SearchBar/SerchBar';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 const Movies = () => {
+  const [searchParams, setSearchParams] = useSearchParams('');
+  const query = searchParams.get('query');
+  const [searchValue, setSearchValue] = useState(query ? query : '');
+  const [moviesArray, setMoviesArray] = useState([]);
+
+  useEffect(() => {
+    async function fetchMoviesList(value) {
+      try {
+        const moviesArray = await fetchMovieByQuery(value);
+        setMoviesArray([...moviesArray]);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (searchValue === '') {
+      return;
+    }
+    fetchMoviesList(searchValue);
+  }, [searchValue]);
+
+  const saveSearchValue = value => {
+    if (value === '') {
+      return;
+    }
+
+    setSearchValue(value);
+    setSearchParams({ query: value });
+  };
+
   return (
-    <main>
-      <h1>About Us</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus
-        laborum amet ab cumque sit nihil dolore modi error repudiandae
-        perspiciatis atque voluptas corrupti, doloribus ex maiores quam magni
-        mollitia illum dolor quis alias in sequi quod. Sunt ex numquam hic
-        asperiores facere natus sapiente cum neque laudantium quam, expedita
-        voluptates atque quia aspernatur saepe illo, rem quasi praesentium
-        aliquid sed inventore obcaecati veniam? Nisi magnam vero, dolore
-        praesentium totam ducimus similique asperiores culpa, eius amet
-        repudiandae quam ut. Architecto commodi, tempore ut nostrum voluptas
-        dolorum illum voluptatum dolores! Quas perferendis quis alias excepturi
-        eaque voluptatibus eveniet error, nulla rem iusto?
-      </p>
-    </main>
+    <>
+      <SearchBar onSubmit={saveSearchValue} />
+      <MovieList movies={moviesArray} />
+    </>
   );
 };
 

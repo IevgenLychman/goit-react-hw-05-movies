@@ -1,11 +1,12 @@
 import { fetchMovieById } from 'components/Api/Api';
 import { useEffect, Suspense, useState } from 'react';
-import { NavLink, Outlet, useParams } from 'react-router-dom';
+import { NavLink, Outlet, useParams, useLocation } from 'react-router-dom';
 
-const Movie = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
-  const goBackLink = '/';
+  const location = useLocation();
+  const goBackLink = location.state?.from ?? '/';
 
   useEffect(() => {
     async function fetchMovie(id) {
@@ -66,4 +67,4 @@ const Movie = () => {
   );
 };
 
-export default Movie;
+export default MovieDetails;
