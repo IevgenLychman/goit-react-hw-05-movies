@@ -10,6 +10,8 @@ const MovieDetails = () => {
 
   const goBackLink = location.state?.from ?? '/movie';
 
+  console.log(goBackLink);
+
   useEffect(() => {
     async function fetchMovie(id) {
       try {
@@ -49,15 +51,18 @@ const MovieDetails = () => {
             <p>{movie.genres}</p>
           </div>
         </FilmDesc>
-
         <div>
           <p>Additional information</p>
           <ul>
             <li>
-              <Links to="cast">Cast</Links>
+              <Links to="cast" state={{ from: goBackLink }}>
+                Cast
+              </Links>
             </li>
             <li>
-              <Links to="reviews">Reviews</Links>
+              <Links to="reviews" state={{ from: goBackLink }}>
+                Reviews
+              </Links>
             </li>
           </ul>
         </div>
